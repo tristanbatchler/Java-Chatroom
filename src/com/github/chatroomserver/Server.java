@@ -11,67 +11,76 @@ import java.net.Socket;
  * Created by Tristan on 6/06/2018.
  */
 public class Server {
+    private final static int MAX_CLIENTS = 64;
+
     private int port;
-    private ServerSocket welcome;
-    private Socket client;
+    private ServerSocket serverSocket;
+    private Socket[] clientSockets = new Socket[MAX_CLIENTS];
+    private int nClients = 0;
     String clientMessage;
     private boolean running = false;
 
-    private Thread manage, send, receive;
+    private Thread manageThread, sendThread, listen;
 
     public Server(int port) {
         this.port = port;
         try {
-            welcome = new ServerSocket(port);
-            client = welcome.accept();
-            System.out.println("Accepted client " + client + ".");
+            serverSocket = new ServerSocket(port);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         running = true;
+        System.out.println("Server started on " + port + ".");
+
         manageClients();
-        receive();
+        listen();
     }
 
 
     private void manageClients() {
-        manage = new Thread("Manage") {
+        manageThread = new Thread("Manage") {
             public void run() {
-                /*
                 while (running) {
-                    // Managing
+                    try {
+                        clientSockets[nClients] = serverSocket.accept();
+                        nClients++;
+                        System.out.println("Accepted client " + clientSockets[nClients - 1] + ".");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-                */
             }
         };
-        manage.start();
+        manageThread.start();
     }
 
-    private void receive() {
-        receive = new Thread("Receive") {
+    private void listen() {
+        listen = new Thread("Listen") {
             public void run() {
                 System.out.println("Listening...");
                 try {
-                    BufferedReader inFromClient = new BufferedReader(new InputStreamReader(client.getInputStream()));
-                    DataOutputStream outToClient = new DataOutputStream(client.getOutputStream());
-                    while (running) {
-                        clientMessage = inFromClient.readLine();
-                        System.out.println("Received: " + clientMessage);
-                        outToClient.writeBytes(clientMessage);
+                    for (Socket clientSocket : clientSockets) {
+                        BufferedReader inFromClient = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                        DataOutputStream outToClient = new DataOutputStream(clientSocket.getOutputStream());
+                        while (running) {
+                            clientMessage = inFromClient.readLine();
+                            System.out.println("Received: " + clientMessage);
+                            outToClient.writeBytes(clientMessage);
+                        }
+                        clientSocket.close();
+                        serverSocket.close();
                     }
-                    client.close();
-                    welcome.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         };
-        receive.start();
+        listen.start();
     }
 
     private void send() {
-        send = new Thread("Send") {
+        sendThread = new Thread("Send") {
             public void run() {
                 /*
                 while (running) {
@@ -80,6 +89,6 @@ public class Server {
                 */
             }
         };
-        send.start();
+        sendThread.start();
     }
 }
