@@ -1,4 +1,4 @@
-package chatroom;
+package com.github.chatroomclient;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,12 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
 
 public class LoginController {
     @FXML
