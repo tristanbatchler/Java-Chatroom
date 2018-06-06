@@ -8,12 +8,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+
 public class LoginController {
     @FXML
     private TextField txtName, txtAddress, txtPort;
 
     @FXML
-    private void handleLoginButtonAction(ActionEvent e) throws Exception {
+    private void handleLoginButtonAction(ActionEvent event) throws Exception {
         String name = txtName.getText();
         String address = txtAddress.getText();
         int port = Integer.parseInt(txtPort.getText());
@@ -24,13 +30,15 @@ public class LoginController {
         loginStage.close();
 
         // Open new stage
+        openClientStage(name, address, port);
+    }
+
+    private void openClientStage(String name, String address, int port) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("client.fxml"));
         Parent root = loader.load();
 
         ClientController controller = loader.getController();
-        controller.name = name;
-        controller.address = address;
-        controller.port = port;
+        controller.initialize(name, address, port);
 
         Stage clientStage = new Stage();
         clientStage.setTitle("Chat Client");
