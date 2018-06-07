@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/github/chatroomserver/ClientManager.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/github/chatroomserver/Server.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/github/chatroomserver/ClientManager.java" afterPath="$PROJECT_DIR$/src/com/github/chatroomserver/ClientManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/github/chatroomserver/ServerMain.java" afterPath="$PROJECT_DIR$/src/com/github/chatroomserver/ServerMain.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
@@ -64,11 +63,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ServerMain.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ServerMain.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/github/chatroomserver/ServerMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="15" column="22" lean-forward="false" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+            <state relative-caret-position="209">
+              <caret line="47" column="34" lean-forward="false" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -76,24 +75,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClientManager.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ClientManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/github/chatroomserver/ClientManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="31" column="37" lean-forward="true" selection-start-line="31" selection-start-column="37" selection-end-line="31" selection-end-column="37" />
+            <state relative-caret-position="214">
+              <caret line="19" column="13" lean-forward="true" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LoginController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/github/chatroomclient/LoginController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="31" column="35" lean-forward="true" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -101,38 +90,12 @@
       <file leaf-file-name="ClientController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/github/chatroomclient/ClientController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="82" column="26" lean-forward="true" selection-start-line="82" selection-start-column="8" selection-end-line="82" selection-end-column="26" />
+            <state relative-caret-position="259">
+              <caret line="102" column="41" lean-forward="false" selection-start-line="102" selection-start-column="41" selection-end-line="102" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="login.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/github/chatroomclient/login.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" column="16" lean-forward="false" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="client.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/github/chatroomclient/client.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="249" lean-forward="false" selection-start-line="14" selection-start-column="249" selection-end-line="14" selection-end-column="249" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
           </provider>
         </entry>
       </file>
@@ -151,6 +114,10 @@
       <find>sample</find>
       <find>in</find>
       <find>out</find>
+      <find>try (</find>
+      <find>.close</find>
+      <find>new Buff</find>
+      <find>new Pr</find>
     </findStrings>
     <replaceStrings>
       <replace>is</replace>
@@ -195,11 +162,11 @@
         <option value="$PROJECT_DIR$/src/chatroom/ListenRunner.java" />
         <option value="$PROJECT_DIR$/src/com/github/chatroomclient/ListenRunner.java" />
         <option value="$PROJECT_DIR$/src/com/github/chatroomserver/Main.java" />
-        <option value="$PROJECT_DIR$/src/com/github/chatroomclient/ClientController.java" />
         <option value="$PROJECT_DIR$/src/com/github/chatroomserver/Client.java" />
-        <option value="$PROJECT_DIR$/src/com/github/chatroomserver/ClientManager.java" />
         <option value="$PROJECT_DIR$/src/com/github/chatroomserver/Server.java" />
         <option value="$PROJECT_DIR$/src/com/github/chatroomserver/ServerMain.java" />
+        <option value="$PROJECT_DIR$/src/com/github/chatroomclient/ClientController.java" />
+        <option value="$PROJECT_DIR$/src/com/github/chatroomserver/ClientManager.java" />
       </list>
     </option>
   </component>
@@ -313,7 +280,7 @@
       <recent name="C:\Users\Tristan\OneDrive\Java Projects\SimpleChatroom\src\chatroom" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ServerMain">
+  <component name="RunManager" selected="Application.Main">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
@@ -610,7 +577,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528297238950</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Tidied up server code, implemented support for multiple clients connecting - each client gets their own thread.">
+      <created>1528347185892</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1528347185892</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -637,7 +611,7 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32937366" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32073435" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32964602" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run with VisualVM" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -667,7 +641,8 @@
     <MESSAGE value="Implemented connection code." />
     <MESSAGE value="Began server-side code. Clients can successfully connect to server, server can interperet messages." />
     <MESSAGE value="Tried implementing support for multiple clients. Accepting works, not listening." />
-    <option name="LAST_COMMIT_MESSAGE" value="Tried implementing support for multiple clients. Accepting works, not listening." />
+    <MESSAGE value="Tidied up server code, implemented support for multiple clients connecting - each client gets their own thread." />
+    <option name="LAST_COMMIT_MESSAGE" value="Tidied up server code, implemented support for multiple clients connecting - each client gets their own thread." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -820,13 +795,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/github/chatroomclient/ClientController.java">
+    <entry file="file://$PROJECT_DIR$/src/com/github/chatroomserver/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="82" column="26" lean-forward="true" selection-start-line="82" selection-start-column="8" selection-end-line="82" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="255">
+          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -838,28 +811,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/github/chatroomserver/ClientManager.java">
+    <entry file="file://$PROJECT_DIR$/src/com/github/chatroomserver/ServerMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="31" column="37" lean-forward="true" selection-start-line="31" selection-start-column="37" selection-end-line="31" selection-end-column="37" />
+        <state relative-caret-position="209">
+          <caret line="47" column="34" lean-forward="false" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/github/chatroomserver/Server.java">
+    <entry file="file://$PROJECT_DIR$/src/com/github/chatroomclient/ClientController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="259">
+          <caret line="102" column="41" lean-forward="false" selection-start-line="102" selection-start-column="41" selection-end-line="102" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/github/chatroomserver/ServerMain.java">
+    <entry file="file://$PROJECT_DIR$/src/com/github/chatroomserver/ClientManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="15" column="22" lean-forward="false" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+        <state relative-caret-position="214">
+          <caret line="19" column="13" lean-forward="true" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

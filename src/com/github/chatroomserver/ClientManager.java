@@ -2,43 +2,37 @@ package com.github.chatroomserver;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  * Created by Tristan on 7/06/2018.
  */
 public class ClientManager extends Thread {
-    final BufferedReader reader;
-    final PrintWriter writer;
-    final Socket socket;
-    boolean running = false;
+    final private BufferedReader reader;
+    final private Socket socket;
+    private boolean running = false;
 
-    public ClientManager(Socket socket, BufferedReader reader, PrintWriter writer) {
-        this.socket = socket;
-        this.reader = reader;
-        this.writer = writer;
+    public ClientManager(Socket sockets) throws IOException{
+        this.socket = sockets;
+        this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     }
 
     @Override
-    public void run()
-    {
+    public void run() {
         running = true;
         String receivedLine;
-        while (running) {
-            try {
-                // receive the answer from client
-                receivedLine = reader.readLine();
+        try {
+            while ((receivedLine = reader.readLine()) != null) {
                 System.out.println(receivedLine);
-                writer.write(receivedLine);
-            } catch (IOException e) {
-                e.printStackTrace();
+                ServerMain.sendMessage(receivedLine);
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        System.out.println("Client " + socket + " disconnected.");
 
         try {
-            // closing resources
             reader.close();
-            writer.close();
-
         } catch(IOException e){
             e.printStackTrace();
         }
