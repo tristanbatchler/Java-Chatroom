@@ -1,17 +1,17 @@
 package com.github.chatroomserver;
 
+import com.github.ChatroomTools;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.ArrayList;
 
 /**
  * Created by Tristan on 6/06/2018.
  */
 public class ServerMain {
-
-    private static ArrayList<Socket> clientSockets = new ArrayList<>();
+    private static ArrayList<ServerClient> clients = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         if (args.length != 1) {
@@ -25,44 +25,41 @@ public class ServerMain {
         System.out.println("Server started on " + port + ".");
 
         ServerSocket serverSocket = new ServerSocket(port);
-        Socket clientSocket = null;
+        ServerClient client = null;
         while (running) {
             try {
                 // Socket object to receive incoming client requests.
-                clientSocket = serverSocket.accept();
-                clientSockets.add(clientSocket);
-                System.out.println("A new client is connected: " + clientSocket);
+                client = new ServerClient("anonymous", serverSocket.accept());
+                clients.add(client);
 
-                // create a new thread object
-                ClientManager t = new ClientManager(clientSocket);
+                System.out.println("New client connected: " + client);
 
-                // Invoking the start() method
+                // Create a new thread for this client.
+                ClientManager t = new ClientManager(client);
                 t.start();
             } catch (IOException e) {
-                clientSocket.close();
+                client.socket.close();
                 e.printStackTrace();
             }
         }
     }
 
-    public static void process(Socket clientSocket, String data) {
-        String address = clientSocket.getInetAddress().getHostName();
-        int port = clientSocket.getPort();
+    public static void process(ServerClient client, String data) {
         if (data.startsWith("/LOGIN/")) {
-            sendMessage(address + ":" + port + " has joined the room.");
+            client.name = ChatroomTools.getNameFromData(data);
         } else if (data.startsWith("/SAY/")) {
-            sendMessage(address + ":" + port + ": " + data.replace("/SAY/", ""));
+
         } else {
-            //sendMessage(data);
             System.out.println("Unknown data: " + data + " not sent.");
         }
+        send(data);
     }
 
-    public static void sendMessage(String message) {
-        for (Socket s : clientSockets) {
+    public static void send(String data) {
+        for (ServerClient c : clients) {
             try {
-                PrintWriter writer = new PrintWriter(s.getOutputStream(), true);
-                writer.println(message);
+                PrintWriter writer = new PrintWriter(c.socket.getOutputStream(), true);
+                writer.println(data);
             } catch (IOException e) {
                 e.printStackTrace();
             }

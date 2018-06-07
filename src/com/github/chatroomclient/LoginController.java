@@ -35,7 +35,7 @@ public class LoginController {
         controller.initialize(name, address, port);
 
         Stage clientStage = new Stage();
-        clientStage.setTitle("Chat Client");
+        clientStage.setTitle("Chat ServerClient");
         clientStage.setScene(new Scene(root, 640, 480));
         clientStage.show();
     }
