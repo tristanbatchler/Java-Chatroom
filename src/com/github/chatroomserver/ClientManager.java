@@ -2,7 +2,6 @@ package com.github.chatroomserver;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.ArrayList;
 
 /**
  * Created by Tristan on 7/06/2018.
