@@ -23,7 +23,7 @@ public class ClientManager extends Thread {
         try {
             while ((receivedLine = reader.readLine()) != null) {
                 System.out.println(receivedLine);
-                ServerMain.sendMessage(receivedLine);
+                ServerMain.process(socket, receivedLine);
             }
         } catch (IOException e) {
             e.printStackTrace();

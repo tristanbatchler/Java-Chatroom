@@ -45,7 +45,20 @@ public class ServerMain {
         }
     }
 
-    public static void sendMessage(String message){
+    public static void process(Socket clientSocket, String data) {
+        String address = clientSocket.getInetAddress().getHostName();
+        int port = clientSocket.getPort();
+        if (data.startsWith("/LOGIN/")) {
+            sendMessage(address + ":" + port + " has joined the room.");
+        } else if (data.startsWith("/SAY/")) {
+            sendMessage(address + ":" + port + ": " + data.replace("/SAY/", ""));
+        } else {
+            //sendMessage(data);
+            System.out.println("Unknown data: " + data + " not sent.");
+        }
+    }
+
+    public static void sendMessage(String message) {
         for (Socket s : clientSockets) {
             try {
                 PrintWriter writer = new PrintWriter(s.getOutputStream(), true);
