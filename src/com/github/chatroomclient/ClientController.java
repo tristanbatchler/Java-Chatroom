@@ -8,6 +8,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.util.List;
 
 public class ClientController {
 
@@ -52,12 +53,9 @@ public class ClientController {
         client.close();
     }
 
-    void addUserToList(Client client) {
-        listUsers.getItems().add(client);
-    }
-
-    void removeUserFromList(Client client) {
-        listUsers.getItems().remove(client);
+    void updateUserList(List<Client> userList) {
+        listUsers.getItems().clear();
+        listUsers.getItems().addAll(userList);
     }
 
     void consoleLog(String message) {

@@ -1,6 +1,7 @@
 package com.github.chatroomclient;
 
 import com.github.ChatroomTools;
+import javafx.application.Platform;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  * Created by Tristan on 7/06/2018.
@@ -33,7 +35,7 @@ public class Client {
             try {
                 socket = connect(address, port);
                 sendData("/LOGIN//" + this + "/");
-                sendData("/ADDUSERTOLIST//" + this + "/");
+                sendData("/UPDATEUSERLIST//" + this + "/");
                 listen();
             } catch (IOException e) {
                 controller.consoleLog("Failed due to an IO Exception.");
@@ -76,10 +78,18 @@ public class Client {
                             controller.consoleLog(name + ": " + ChatroomTools.stripMeta(data));
                         } else if (data.startsWith("/LOGOUT/")) {
                             controller.consoleLog(name + " has left the room.");
-                        } else if (data.startsWith("/ADDUSERTOLIST/")) {
-                            controller.addUserToList(ChatroomTools.getClientFromData(data));
-                        } else if (data.startsWith("/REMOVEUSERFROMLIST/")) {
-                            controller.removeUserFromList(ChatroomTools.getClientFromData(data));
+                        } else if (data.startsWith("/USERLIST/")) {
+                            ArrayList<Client> clients = new ArrayList<>();
+
+                            String clientsListString = ChatroomTools.stripMeta(data);
+                            for (String clientString : clientsListString.substring(1, clientsListString.length() - 1).split(", ")) {
+                                clients.add(getClientFromString(clientString));
+                            }
+                            Platform.runLater(
+                                    () -> controller.updateUserList(clients)
+                            );
+                        } else if (data.startsWith("/PING/")) {
+                            sendData("/PINGRESPONSE//" + this + "/");
                         }
                     }
                 } catch (IOException e) {
@@ -94,7 +104,6 @@ public class Client {
     void close() {
         try {
             sendData("/LOGOUT//" + this + "/");
-            sendData("/REMOVEUSERFROMLIST/" + this + "/");
             socket.close();
             reader.close();
             writer.close();
@@ -115,5 +124,14 @@ public class Client {
         }
         Client other = (Client)o;
         return other.name.equals(name) && other.address.equals(address) && other.port == port;
+    }
+
+    public static Client getClientFromString(String clientString) {
+        // Of the form name@address:port
+        String[] arr = clientString.split("@");
+        String name = arr[0];
+        String address = arr[1].split(":")[0];
+        int port = Integer.parseInt(arr[1].split(":")[1]);
+        return new Client(name, address, port, null);
     }
 }

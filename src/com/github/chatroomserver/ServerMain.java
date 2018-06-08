@@ -5,6 +5,7 @@ import com.github.ChatroomTools;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -25,37 +26,73 @@ public class ServerMain {
         System.out.println("Server started on " + port + ".");
 
         ServerSocket serverSocket = new ServerSocket(port);
-        ServerClient client = null;
-        while (running) {
-            try {
-                // Socket object to receive incoming client requests.
-                client = new ServerClient("anonymous", serverSocket.accept());
-                clients.add(client);
 
-                System.out.println("New client connected: " + client);
+        // Search for and accept new clients
+        Thread searchAndAcceptThread = new Thread("Search and Accept") {
+            public void run() {
+                ServerClient client = null;
+                while (running) {
+                    try {
+                        // Socket object to receive incoming client requests.
+                        client = new ServerClient("anonymous", serverSocket.accept());
+                        clients.add(client);
 
-                // Create a new thread for this client.
-                ClientManager t = new ClientManager(client);
-                t.start();
-            } catch (IOException e) {
-                client.socket.close();
-                e.printStackTrace();
+                        System.out.println("New client connected: " + client);
+
+                        // Run a new thread for this client.
+                        client.start();
+                    } catch (IOException e) {
+                        //client.socket.close();
+                        e.printStackTrace();
+                    }
+                }
             }
-        }
+        };
+        searchAndAcceptThread.start();
+
+
+        // Manage clients
+        Thread pingThread = new Thread("Ping") {
+            public void run() {
+                System.out.println("Pinging thread running.");
+                while (true) {
+                    System.out.println("Searching for inactive users.");
+                            /* Ping all clients with lastResponseTime more than 1 second ago and kick all clients
+                             * with lastResponseTime more than 5 seconds ago. */
+                    for (ServerClient c : clients) {
+                        int secondsSinceLastResponse = LocalDateTime.now().getSecond() - c.lastResponseTime.getSecond();
+                        if (secondsSinceLastResponse > 1) {
+                            send("/PING//server");
+                        } else if (secondsSinceLastResponse > 5) {
+                            kick(c);
+                        }
+                    }
+                    // Wait 1 second
+                    try {
+                        Thread.sleep(1000);
+                    } catch(InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        pingThread.start();
     }
 
-    public static void process(ServerClient client, String data) {
+    static void process(ServerClient client, String data) {
         if (data.startsWith("/LOGIN/")) {
             client.name = ChatroomTools.getNameFromData(data);
-        } else if (data.startsWith("/SAY/")) {
-
-        } else {
-            System.out.println("Unknown data: " + data + " not sent.");
+            sendUserList();
+            send(data);
+        } else if (data.startsWith("/LOGOUT/")) {
+            clients.remove(client);
+            sendUserList();
+            send(data);
         }
-        send(data);
     }
 
-    public static void send(String data) {
+    private static void send(String data) {
+        System.out.println("Sending: " + data + " to all.");
         for (ServerClient c : clients) {
             try {
                 PrintWriter writer = new PrintWriter(c.socket.getOutputStream(), true);
@@ -64,5 +101,21 @@ public class ServerMain {
                 e.printStackTrace();
             }
         }
+    }
+
+    private static void kick(ServerClient c) {
+        try {
+            c.closeReader();
+        } catch (IOException e) {
+            e.printStackTrace();
+            c.interrupt();
+        }
+        send("/SAY/" + c.getName() + " has been kicked from the room./server/");
+        clients.remove(c);
+        sendUserList();
+    }
+
+    private static void sendUserList() {
+        send("/USERLIST/" + clients + "/server");
     }
 }

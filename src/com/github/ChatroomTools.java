@@ -32,7 +32,6 @@ public class ChatroomTools {
         String address = meta[1].split(":")[0];
         int port = Integer.parseInt(meta[1].split(":")[1]);
         return new Client(name, address, port, null);
-
     }
 
 }
