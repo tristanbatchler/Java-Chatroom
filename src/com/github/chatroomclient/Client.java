@@ -89,7 +89,7 @@ public class Client {
                                     () -> controller.updateUserList(clients)
                             );
                         } else if (data.startsWith("/PING/")) {
-                            sendData("/PINGRESPONSE//" + this + "/");
+                            sendData("/PINGRESPONSE//" + Client.this + "/");
                         }
                     }
                 } catch (IOException e) {

@@ -1,5 +1,6 @@
 package com.github.chatroomclient;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,6 +38,13 @@ public class LoginController {
         Stage clientStage = new Stage();
         clientStage.setTitle("Chat ServerClient");
         clientStage.setScene(new Scene(root, 640, 480));
+
+        //this makes all stages close and the app exit when the main stage is closed
+        clientStage.setOnCloseRequest(e -> {
+            Platform.exit();
+            System.exit(0);
+        });
+
         clientStage.show();
     }
 
