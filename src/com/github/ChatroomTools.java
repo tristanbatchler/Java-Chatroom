@@ -1,7 +1,5 @@
 package com.github;
 
-import com.github.chatroomclient.Client;
-
 /**
  * Created by Tristan on 7/06/2018.
  */
@@ -22,16 +20,6 @@ public class ChatroomTools {
         for (; data.charAt(beginningOfTailPos) != '/'; beginningOfTailPos--);
         String meta = data.substring(beginningOfTailPos + 1, data.length() - 1);
         return meta.split("@")[0];
-    }
-
-    public static Client getClientFromData(String data) {
-        int beginningOfTailPos = data.length() - 2;
-        for (; data.charAt(beginningOfTailPos) != '/'; beginningOfTailPos--);
-        String[] meta = data.substring(beginningOfTailPos + 1, data.length() - 1).split("@");
-        String name = meta[0];
-        String address = meta[1].split(":")[0];
-        int port = Integer.parseInt(meta[1].split(":")[1]);
-        return new Client(name, address, port, null);
     }
 
 }
